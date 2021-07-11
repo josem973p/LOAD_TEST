@@ -17,7 +17,7 @@ public class Conexion {
     private static String url = null;
 
     public Conexion(String usuario,String clave , String url) {
-        this.login=login;
+        this.login=usuario;
         this.clave=clave;
         this.url =url;
     }
@@ -58,4 +58,37 @@ public class Conexion {
         }
     }
 
+    public static String getLogin() {
+        return login;
+    }
+
+    public static void setLogin(String login) {
+        Conexion.login = login;
+    }
+
+    public static String getClave() {
+        return clave;
+    }
+
+    public static void setClave(String clave) {
+        Conexion.clave = clave;
+    }
+
+    public static String getUrl() {
+        return url;
+    }
+
+    public static void setUrl(String url) {
+        Conexion.url = url;
+    }
+
+    public static Connection getConn() {
+        return conn;
+    }
+
+    public static void setConn(Connection conn) {
+        Conexion.conn = conn;
+    }
+
+    
 }

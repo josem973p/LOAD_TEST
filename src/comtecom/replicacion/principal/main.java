@@ -26,15 +26,21 @@ public class main {
      //   Conexion c = new Conexion();
       //  c.getConnection();
   String login = args[0];
+      //  System.out.println(args[0]);
     String clave = args[1];
+   // System.out.println(args[1]);
     String url_args = args[2];
+ //   System.out.println(args[2]);
      
      String url = "jdbc:oracle:thin:@"; 
      url=url.concat(url_args);
      
-     System.out.println(url);
+    // System.out.println(url);
      
         Conexion c = new Conexion(login,clave,url);
+        System.out.println(c.getLogin());
+        System.out.println(c.getClave());
+        System.out.println(c.getUrl());
       
           
           
