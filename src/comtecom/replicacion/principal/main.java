@@ -25,14 +25,16 @@ public class main {
       
      //   Conexion c = new Conexion();
       //  c.getConnection();
-  //String login = args[0];
-   //  String clave = args[1];
-   // String url_args = args[2];
+  String login = args[0];
+    String clave = args[1];
+    String url_args = args[2];
      
-   //  String url = "jdbc:oracle:thin:@"; 
-   //  url=url.concat(url_args);
+     String url = "jdbc:oracle:thin:@"; 
+     url=url.concat(url_args);
      
-       // System.out.println(url);
+     System.out.println(url);
+     
+        Conexion c = new Conexion(login,clave,url);
       
           
           
@@ -58,6 +60,7 @@ public class main {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+
 
         PreparedStatement pst = null;
 

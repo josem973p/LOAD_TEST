@@ -21,7 +21,7 @@ public class VENTA_registro_salida_corrida extends Thread {
 
     @Override
     public void run() {
-      //  Conexion c = new Conexion();
+     
 
         Connection con = null;
       try {
