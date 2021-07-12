@@ -38,7 +38,7 @@ public class Hilos  extends Thread{
      
     }
      
-     int registroXhilo=  Math.round(this.n_registros/4);
+     int registroXhilo=  Math.round(this.n_registros/20);
     
     
      
