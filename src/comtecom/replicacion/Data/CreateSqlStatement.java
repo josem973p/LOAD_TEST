@@ -11,11 +11,16 @@ import java.util.List;
  * @author jose1
  */
 public class CreateSqlStatement {
+    
+    String schem;
+    String tabl;
 
     public String Statement(String Schema, String tabla) {
+        this.schem=Schema;
+        this.tabl=tabla;
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
-        tableColumns = mp.DataTable("HR","HIST_CAJA_CONCENTRADO");
+        tableColumns = mp.DataTable(Schema,tabla);
         int longitud= tableColumns.size();
 
         StringBuilder insertStatement = new StringBuilder();
@@ -41,7 +46,7 @@ public class CreateSqlStatement {
         insertStatement.append(")");
 
        // System.out.println("tamaño" + tam);
-        System.out.println(insertStatement);
+     //   System.out.println(insertStatement);
         
      //   RamdomValues rand = new RamdomValues();
       //   String cadgenrada =rand.generateString(5);
@@ -51,8 +56,8 @@ public class CreateSqlStatement {
      //    String fecha = rand.generateDate();
         // System.out.println(fecha);
          GenerateValues valores = new GenerateValues();
-         String cadenaValores =valores.values();
-         System.out.println(cadenaValores);
+         String cadenaValores =valores.values(schem,tabl);
+      //   System.out.println(cadenaValores);
          
          insertStatement.append(" "+cadenaValores);
          

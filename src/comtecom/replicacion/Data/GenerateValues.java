@@ -12,12 +12,12 @@ import java.util.List;
  */
 public class GenerateValues {
 
-    public String values() {
+    public String values(String schema, String tabla) {
 
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
         RamdomValues random = new RamdomValues();
-        tableColumns = mp.DataTable("HR","HIST_CAJA_CONCENTRADO");
+        tableColumns = mp.DataTable(schema,tabla);
 
         StringBuilder insertStatement = new StringBuilder();
         // String InsertStatement ="insert into schema.tabla(clumnas) values(valores)";

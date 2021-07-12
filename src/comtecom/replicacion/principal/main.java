@@ -9,6 +9,7 @@ import comtecom.replicacion.Data.CreateSqlStatement;
 import comtecom.replicacion.conexiones.Conexion;
 import comtecom.replicacion.dynamic.TableMapper;
 import comtecom.replicacion.tablas.VENTA_registro_salida_corrida;
+import comtecom.replicacion.transacciones.Hilos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,7 +28,7 @@ public class main {
 
     public static void main(String[] args) throws SQLException {
         
-        /**
+        
         Scanner entrada = new Scanner(System.in);
         
         String login = args[0];
@@ -47,24 +48,32 @@ public class main {
         
         System.out.println("Numero de  transacciones: ");
         int n = entrada.nextInt();
+        System.out.println("shema: ");
+        String schema = entrada.next();
+        System.out.println("tabla");
+        String tabla = entrada.next();
+        
+        System.out.println("el esquema es"+schema);
+        System.out.println("la tbla es"+ tabla);
 
-        VENTA_registro_salida_corrida obj = new VENTA_registro_salida_corrida(n);
+        Hilos obj = new Hilos(n,schema,tabla);
 
-        VENTA_registro_salida_corrida h1 = new VENTA_registro_salida_corrida();
-        VENTA_registro_salida_corrida h2 = new VENTA_registro_salida_corrida();
-        VENTA_registro_salida_corrida h3 = new VENTA_registro_salida_corrida();
-        VENTA_registro_salida_corrida h4 = new VENTA_registro_salida_corrida();
+        Hilos h1 = new Hilos();
+       Hilos h2 = new Hilos();
+       Hilos h3 = new Hilos();
+       Hilos h4 = new Hilos();
 
         h1.start();
         h2.start();
-        h3.start();
+       h3.start();
         h4.start();
-**/
+
+        /**
         TableMapper mp = new TableMapper();
         mp.DataTable("HR","HIST_CAJA_CONCENTRADO");
         CreateSqlStatement ce = new CreateSqlStatement();
         ce.Statement("HR","HIST_CAJA_CONCENTRADO");
-        
+        **/
         
     }
 
