@@ -5,6 +5,7 @@ import comtecom.replicacion.dynamic.TableMapper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.List;
  */
 public class GenerateValues {
 
-    public String values(String schema, String tabla) {
+    public String values(String schema, String tabla,String PK,String UNIQUE) {
 
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
@@ -28,6 +29,7 @@ public class GenerateValues {
         int j=0;
         int longitud= tableColumns.size();
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
+           /*
             if (i==0) {
                 insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
                 insertStatement.append(",");
@@ -36,11 +38,44 @@ public class GenerateValues {
                 continue;
                             
             }
+*/
             Object next = iterator.next();
             TableAttributes atributos = (TableAttributes) next;
-            //guardar tipo y longitud y generarlo
             String tipo = atributos.getDataType();
             int length = atributos.getLength();
+            //guardar tipo y longitud y generarlo
+            
+            //se debe implementar codigo para que busque la PK
+            if (atributos.getColName().equals(PK)) {
+                insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
+                insertStatement.append(",");
+                i++;
+                continue;
+            }
+            if(atributos.getColName().equals(UNIQUE) /**&& atributos.getDataType().equals("VARCHAR2")*/){
+                System.out.println("entre al metodo");
+                int[] lon = new  int[length];
+                for (int k = 1; k < length; k++) {
+                    lon[i]=i;
+                }
+                 Random rando = new Random();
+                int c = (int) (rando.nextInt(length));
+                    
+                String cad = random.generateString(c);
+                 insertStatement.append("null");
+                insertStatement.append(",");
+                i++;
+                continue;
+            
+            }else if(atributos.getColName().equals(UNIQUE) && atributos.getDataType().equals("NUMBER")){
+            insertStatement.append("HR.SEC_UNIQUE.NEXTVAL");
+                insertStatement.append(",");
+                i++;
+                continue;
+            }
+            
+            
+            //
           //  System.out.println("numero ->" +length);
             int datatype=0;
             String valor =  null;

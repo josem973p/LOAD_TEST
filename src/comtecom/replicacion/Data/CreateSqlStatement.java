@@ -14,10 +14,15 @@ public class CreateSqlStatement {
     
     String schem;
     String tabl;
+    String pk;
+    String UNIQUE;
+    
 
-    public String Statement(String Schema, String tabla) {
+    public String Statement(String Schema, String tabla,String pk,String UNIQUE) {
         this.schem=Schema;
         this.tabl=tabla;
+        this.pk=pk;
+        this.UNIQUE=UNIQUE;
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
         tableColumns = mp.DataTable(Schema,tabla);
@@ -34,7 +39,7 @@ public class CreateSqlStatement {
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
             Object next = iterator.next();
             TableAttributes atributos = (TableAttributes) next;
-
+           // System.out.println("calumnas "+atributos.getColName());
             insertStatement.append(atributos.getColName());
             if (i != longitud-1) {
                 insertStatement.append(",");
@@ -56,7 +61,7 @@ public class CreateSqlStatement {
      //    String fecha = rand.generateDate();
         // System.out.println(fecha);
          GenerateValues valores = new GenerateValues();
-         String cadenaValores =valores.values(schem,tabl);
+         String cadenaValores =valores.values(schem,tabl,pk,UNIQUE);
       //   System.out.println(cadenaValores);
          
          insertStatement.append(" "+cadenaValores);

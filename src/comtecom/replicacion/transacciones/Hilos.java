@@ -26,11 +26,14 @@ public class Hilos  extends Thread{
     static   int  n_registros;
     static String schema;
     static String tabla;
-
-    public Hilos(int n_registros, String schema, String tabla) {
+    static String pk;
+    String UNIQUE;
+    public Hilos(int n_registros, String schema, String tabla,String pk,String UNIQUE) {
         this.n_registros = n_registros;
         this.schema=schema;
         this.tabla=tabla;
+        this.pk=pk;
+        this.UNIQUE=UNIQUE;
         System.out.println("ddd"+this.n_registros);
     }
     
@@ -60,7 +63,7 @@ public class Hilos  extends Thread{
 
       //  String sql = "insert into hr.prueba(id,nombre) VALUES(HR.PRUEBA_SEC.NEXTVAL,?)";
       //String sql = "insert into HR.REGISTRO_SALIDA_CORRIDA (REGISTROSALIDACORRIDA_ID, CORRIDA_ID, FECCORRIDA, HORACORRIDA, CLASESERVICIO_ID, MARCA_ID, ORIGENTRAMO_ID, DESTINOCORRIDA_ID, FECHORSALIDATRAMO, FECHORSALIDAINFORMADA, REGIONCORRIDA_ID, CAUSAIMPUNTUALIDAD_ID, DESCCOMENTARIO, INDEDICION, USUARIO_ID, FECHORACT, STATUS, CVEPUNTOVENTA, DESCTIPOSERVICIO, INDPUNTUALIDAD, SISTEMAREGISTRO_ID) values (HR.PRUEBA_SEC.NEXTVAL, 5, '22/12/2007', '19/04/2005', 9, 2, 5, 7, '12/08/2020', '15/04/2021', 6, 5, 'd', 5, 2, '15/09/2020', 1, 'a', 'b', 'a', 5)";
-      String sql = statement.Statement(schema, tabla);
+      String sql = statement.Statement(schema, tabla,pk,UNIQUE);
       
       //String commit = "commit";
         System.out.println(this.n_registros);

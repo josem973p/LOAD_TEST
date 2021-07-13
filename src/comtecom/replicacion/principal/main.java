@@ -52,21 +52,25 @@ public class main {
         String schema = entrada.next();
         System.out.println("tabla");
         String tabla = entrada.next();
+        System.out.println("PK");
+        String pk = entrada.next();
+        System.out.println("UNIQUE");
+        String UNIQUE = entrada.next();
         
         System.out.println("el esquema es"+schema);
         System.out.println("la tbla es"+ tabla);
 
-        Hilos obj = new Hilos(n,schema,tabla);
+        Hilos obj = new Hilos(n,schema,tabla,pk,UNIQUE);
 
         Hilos h1 = new Hilos();
        Hilos h2 = new Hilos();
-       Hilos h3 = new Hilos();
-       Hilos h4 = new Hilos();
+      Hilos h3 = new Hilos();
+     Hilos h4 = new Hilos();
 
         h1.start();
-        h2.start();
-       h3.start();
-        h4.start();
+       h2.start();
+      h3.start();
+       h4.start();
 
         /**
         TableMapper mp = new TableMapper();

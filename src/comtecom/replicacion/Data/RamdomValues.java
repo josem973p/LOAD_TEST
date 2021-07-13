@@ -13,8 +13,12 @@ public class RamdomValues {
     public String generateString(int digitos) {
         //  int digitos = 2;
         StringBuilder cad = new StringBuilder();
+        if (digitos>10) {
+                digitos=1;
+            }
 
         for (int i = 0; i < digitos; i++) {
+           
 
             char c = (char) (random.nextInt(26) + 'a');
             cad.append(c);
