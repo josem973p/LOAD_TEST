@@ -27,13 +27,14 @@ public class Hilos  extends Thread{
     static String schema;
     static String tabla;
     static String pk;
-    String UNIQUE;
+    static String UNIQUE;
     public Hilos(int n_registros, String schema, String tabla,String pk,String UNIQUE) {
         this.n_registros = n_registros;
         this.schema=schema;
         this.tabla=tabla;
         this.pk=pk;
         this.UNIQUE=UNIQUE;
+        
         System.out.println("ddd"+this.n_registros);
     }
     
@@ -52,6 +53,7 @@ public class Hilos  extends Thread{
         System.out.println("registros por hilo"+this.registroXhilo);
         System.out.println("el eschem es "+this.schema
                 + "ila tabla es"+this.tabla);
+        System.out.println("el unico de la tabla hilo"+UNIQUE);
         Connection con = null;
       try {
             con = Conexion.getConnection();

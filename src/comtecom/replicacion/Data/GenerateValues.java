@@ -12,6 +12,7 @@ import java.util.Random;
  * @author jose1
  */
 public class GenerateValues {
+    Boolean isUnique=false; 
 
     public String values(String schema, String tabla,String PK,String UNIQUE) {
 
@@ -29,6 +30,7 @@ public class GenerateValues {
         int j=0;
         int longitud= tableColumns.size();
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
+          //  isUnique=false;
            /*
             if (i==0) {
                 insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
@@ -52,27 +54,15 @@ public class GenerateValues {
                 i++;
                 continue;
             }
-            if(atributos.getColName().equals(UNIQUE) /**&& atributos.getDataType().equals("VARCHAR2")*/){
-                System.out.println("entre al metodo");
-                int[] lon = new  int[length];
-                for (int k = 1; k < length; k++) {
-                    lon[i]=i;
-                }
-                 Random rando = new Random();
-                int c = (int) (rando.nextInt(length));
-                    
-                String cad = random.generateString(c);
-                 insertStatement.append("null");
-                insertStatement.append(",");
-                i++;
-                continue;
             
-            }else if(atributos.getColName().equals(UNIQUE) && atributos.getDataType().equals("NUMBER")){
-            insertStatement.append("HR.SEC_UNIQUE.NEXTVAL");
-                insertStatement.append(",");
-                i++;
-                continue;
-            }
+              // borra aqui 
+            if(atributos.getColName().equals(UNIQUE) /**&& atributos.getDataType().equals("VARCHAR2")*/){
+             isUnique=true;
+             
+              continue;
+                }
+            
+            //
             
             
             //
@@ -117,9 +107,27 @@ public class GenerateValues {
                // insertStatement.append("'");
             }
 
-            if (i != longitud-1) {
+             if (i == longitud-1) {
+                
+            } else {
+                if (isUnique== true) {
+                    
+                    if (iterator.hasNext()) {
+                       insertStatement.append(","); 
+                    }else{
+                    }
+                    
+                }else{
+                    insertStatement.append(",");
+                }
+             
+            }
+            /**
+            if (isUnique==true ) {
                 insertStatement.append(",");
             }
+            * */
+
 
             i++;
 

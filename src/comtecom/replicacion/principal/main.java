@@ -59,6 +59,7 @@ public class main {
         
         System.out.println("el esquema es"+schema);
         System.out.println("la tbla es"+ tabla);
+        System.out.println("la UNICO es"+ UNIQUE);
 
         Hilos obj = new Hilos(n,schema,tabla,pk,UNIQUE);
 

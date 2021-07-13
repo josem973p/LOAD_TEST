@@ -16,6 +16,7 @@ public class CreateSqlStatement {
     String tabl;
     String pk;
     String UNIQUE;
+    Boolean isUnique=false; 
     
 
     public String Statement(String Schema, String tabla,String pk,String UNIQUE) {
@@ -23,6 +24,7 @@ public class CreateSqlStatement {
         this.tabl=tabla;
         this.pk=pk;
         this.UNIQUE=UNIQUE;
+        System.out.println("unico ->"+this.UNIQUE );
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
         tableColumns = mp.DataTable(Schema,tabla);
@@ -37,13 +39,43 @@ public class CreateSqlStatement {
         int tam = tableColumns.size();
         int i = 0;
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
+          
+          //  isUnique= false;
+            
             Object next = iterator.next();
             TableAttributes atributos = (TableAttributes) next;
+            
+              // borra aqui 
+            if(atributos.getColName().equals(this.UNIQUE) 
+                    /**&& atributos.getDataType().equals("VARCHAR2")*/){
+                isUnique=true;
+              continue;
+                }
+            
+            //
+            
            // System.out.println("calumnas "+atributos.getColName());
             insertStatement.append(atributos.getColName());
-            if (i != longitud-1) {
+             if (i == longitud-1) {
+                
+            } else {
+                if (isUnique== true) {
+                    
+                    if (iterator.hasNext()) {
+                       insertStatement.append(","); 
+                    }else{
+                    }
+                    
+                }else{
+                    insertStatement.append(",");
+                }
+             
+            }
+            /**
+            if (isUnique==true) {
                 insertStatement.append(",");
             }
+            * */
 
             i++;
 
