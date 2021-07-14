@@ -31,7 +31,7 @@ public class RamdomValues {
      //   int di=digitos;
         
         if (digitos>9) {
-            digitos=8;
+            digitos=1;
         }
 
         StringBuilder num = new StringBuilder();

@@ -75,9 +75,9 @@ public class Hilos extends Thread {
             pst = (OraclePreparedStatement) con.prepareStatement(sql);
             for (int i = 0; i < this.registroXhilo; i++) {
 
-                if (i == 50000 || i == 100000 || i == 150000 || i == 200000 || i == 250000 || i == 300000 || i == 350000 || i == 400000) {
+              //  if (i == 50000 || i == 100000 || i == 150000 || i == 200000 || i == 250000 || i == 300000 || i == 350000 || i == 400000) {
                     System.out.println(i);
-                }
+             //   }
 
                 pst.execute();
 

@@ -121,7 +121,7 @@ public class CreateSqlStatement {
         } else if (datatype == 2) {
             UpdateStatement.append(" " + campo + "=" + valorEntero);
         }
-        UpdateStatement.append(" WHERE " + pk + " BETWEEN " + "1 AND " + num_updates);
+        UpdateStatement.append(" WHERE " + pk + " BETWEEN " + "500000 AND " + "502000");
 
         String update = UpdateStatement.toString();
 
@@ -132,7 +132,7 @@ public class CreateSqlStatement {
 
         StringBuilder UpdateStatement = new StringBuilder();
 
-        UpdateStatement.append("DELETE FROM " + Schema + "." + tabla + " WHERE " + pk + " BETWEEN 1 AND " + num_deletes);
+        UpdateStatement.append("DELETE FROM " + Schema + "." + tabla + " WHERE " + pk + " BETWEEN 500000 AND " + "502000");
 
         String delete = UpdateStatement.toString();
 
