@@ -5,14 +5,16 @@ import comtecom.replicacion.dynamic.TableMapper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
  * @author jose1
  */
 public class GenerateValues {
+    Boolean isUnique=false; 
 
-    public String values(String schema, String tabla) {
+    public String values(String schema, String tabla,String PK,String UNIQUE) {
 
         List tableColumns = new ArrayList();
         TableMapper mp = new TableMapper();
@@ -28,20 +30,25 @@ public class GenerateValues {
         int j=0;
         int longitud= tableColumns.size();
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
-            if (i==0) {
+
+            Object next = iterator.next();
+            TableAttributes atributos = (TableAttributes) next;
+            String tipo = atributos.getDataType();
+            int length = atributos.getLength();
+
+            if (atributos.getColName().equals(PK)) {
                 insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
                 insertStatement.append(",");
                 i++;
-                Object next = iterator.next();
                 continue;
-                            
             }
-            Object next = iterator.next();
-            TableAttributes atributos = (TableAttributes) next;
-            //guardar tipo y longitud y generarlo
-            String tipo = atributos.getDataType();
-            int length = atributos.getLength();
-          //  System.out.println("numero ->" +length);
+
+            if(atributos.getColName().equals(UNIQUE) /**&& atributos.getDataType().equals("VARCHAR2")*/){
+             isUnique=true;
+             
+              continue;
+                }
+
             int datatype=0;
             String valor =  null;
             int valorEntero = 0;
@@ -82,8 +89,20 @@ public class GenerateValues {
                // insertStatement.append("'");
             }
 
-            if (i != longitud-1) {
-                insertStatement.append(",");
+             if (i == longitud-1) {
+                
+            } else {
+                if (isUnique== true) {
+                    
+                    if (iterator.hasNext()) {
+                       insertStatement.append(","); 
+                    }else{
+                    }
+                    
+                }else{
+                    insertStatement.append(",");
+                }
+             
             }
 
             i++;
