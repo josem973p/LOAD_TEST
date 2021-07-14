@@ -37,7 +37,7 @@ public class GenerateValues {
             int length = atributos.getLength();
 
             if (atributos.getColName().equals(PK)) {
-                insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
+                insertStatement.append(schema+".PRUEBA_SEC.NEXTVAL");
                 insertStatement.append(",");
                 i++;
                 continue;

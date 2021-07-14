@@ -27,7 +27,7 @@ public class main {
         
         
         
-        ConfigFile.loadConfig("../conf.txt");
+        ConfigFile.loadConfig("./conf.txt");
         
         
     }

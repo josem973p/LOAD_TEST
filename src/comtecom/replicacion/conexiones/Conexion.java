@@ -38,10 +38,10 @@ public class Conexion {
             conn.setAutoCommit(false);
             
             if (conn != null) {
-                System.out.println("Conexion Exitosa");
+              //  System.out.println("Conexion Exitosa");
 
             } else {
-                System.out.println("Estas bien Wey!! ");
+                System.out.println("Error de Conexion, verifica los datos !! ");
             }
 
         } catch (ClassNotFoundException | SQLException e) {
