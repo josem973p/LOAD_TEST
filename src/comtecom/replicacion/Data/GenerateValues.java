@@ -30,43 +30,25 @@ public class GenerateValues {
         int j=0;
         int longitud= tableColumns.size();
         for (Iterator iterator = tableColumns.iterator(); iterator.hasNext();) {
-          //  isUnique=false;
-           /*
-            if (i==0) {
-                insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
-                insertStatement.append(",");
-                i++;
-                Object next = iterator.next();
-                continue;
-                            
-            }
-*/
+
             Object next = iterator.next();
             TableAttributes atributos = (TableAttributes) next;
             String tipo = atributos.getDataType();
             int length = atributos.getLength();
-            //guardar tipo y longitud y generarlo
-            
-            //se debe implementar codigo para que busque la PK
+
             if (atributos.getColName().equals(PK)) {
                 insertStatement.append("HR.PRUEBA_SEC.NEXTVAL");
                 insertStatement.append(",");
                 i++;
                 continue;
             }
-            
-              // borra aqui 
+
             if(atributos.getColName().equals(UNIQUE) /**&& atributos.getDataType().equals("VARCHAR2")*/){
              isUnique=true;
              
               continue;
                 }
-            
-            //
-            
-            
-            //
-          //  System.out.println("numero ->" +length);
+
             int datatype=0;
             String valor =  null;
             int valorEntero = 0;
@@ -122,12 +104,6 @@ public class GenerateValues {
                 }
              
             }
-            /**
-            if (isUnique==true ) {
-                insertStatement.append(",");
-            }
-            * */
-
 
             i++;
 

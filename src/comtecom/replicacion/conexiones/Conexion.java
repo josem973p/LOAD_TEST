@@ -38,7 +38,7 @@ public class Conexion {
             conn.setAutoCommit(false);
             
             if (conn != null) {
-                System.out.println("Conecion Exitosa");
+                System.out.println("Conexion Exitosa");
 
             } else {
                 System.out.println("Estas bien Wey!! ");

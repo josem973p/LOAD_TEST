@@ -37,30 +37,20 @@ public class TableMapper {
         StringBuilder query = new StringBuilder();
         query.append("select column_name, data_type, data_length from all_tab_columns where owner='");
         query.append(schema+"'"+" and table_name='"+tabla+"'");
-        System.out.println(query);
+        //System.out.println(query);
         String sql= query.toString();
 
-     //   String sql = "select column_name, data_type, data_length from all_tab_columns where owner='HR' and table_name='REGISTRO_SALIDA_CORRIDA'";
-
-        try {
+    try {
 
             st = con.createStatement();
             rs = st.executeQuery(sql);
 
             while (rs.next()) {
-
                 tableColumns.add(new TableAttributes(rs.getString(1), rs.getString(2), rs.getInt(3)));
-
             }
-
-         //   System.out.println(tableColumns.size());
-         //   System.out.println(tableColumns.get(0).toString());
-          //  System.out.println(tableColumns.get(1).toString());
 
             rs.close();
             con.commit();
-
-         //   System.out.println(rs);
 
         } catch (SQLException e) {
             System.out.println(e);
