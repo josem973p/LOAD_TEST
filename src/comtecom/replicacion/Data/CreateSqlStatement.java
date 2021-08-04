@@ -75,7 +75,7 @@ public class CreateSqlStatement {
 
         String query = insertStatement.toString();
 
-        System.out.println(query);
+        //System.out.println("este ->"+query);
         return query;
 
     }

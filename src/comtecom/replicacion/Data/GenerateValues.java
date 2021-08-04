@@ -109,7 +109,21 @@ public class GenerateValues {
 
         }
         insertStatement.append(")");
+        StringBuilder rep = new StringBuilder();
+        String rr;
+            
+        rr= insertStatement.substring(7);
+        //System.out.println( "cadena substring"+rr);
         
+        /*
+        for (int k = 0; k < 10; k++) {
+            
+            insertStatement.append(",");
+            insertStatement.append(rr);
+          
+        }
+                
+        */
         String valores= insertStatement.toString();
 
         return valores;

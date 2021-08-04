@@ -11,6 +11,7 @@ import comtecom.replicacion.tablas.VENTA_registro_salida_corrida;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oracle.jdbc.OraclePreparedStatement;
@@ -30,7 +31,15 @@ public class Hilos extends Thread {
     static String UNIQUE;
     static int num_updates;
     static int num_deletes;
+    Connection con;
 
+    PreparedStatement pst = null;
+    static String sql;
+    static String Updatesql;
+    //System.out.println(Updatesql);
+    static String Deletesql;
+    static StringBuilder insertsql = new StringBuilder();
+    static String newSql;
 
     public Hilos(int n_registros, String schema, String tabla, String pk, String UNIQUE, int num_updates, int num_deletes) throws SQLException {
         this.con = Conexion.getConnection();
@@ -46,55 +55,76 @@ public class Hilos extends Thread {
 
     public Hilos() throws SQLException {
         this.con = Conexion.getConnection();
+
     }
 
-
     int registroXhilo = Math.round(this.n_registros / 4);
- 
-    
-   Connection con;
+
+    public void generasql() {
+        sql = statement.Statement(schema, tabla, pk, UNIQUE);
+        Updatesql = statement.UpdateStatement(schema, tabla, pk, num_updates);
+        //System.out.println(Updatesql);
+        Deletesql = statement.DeleteStatement(schema, tabla, pk, num_deletes);
+        for (int i = 0; i < 10; i++) {
+            insertsql.append(" " + sql + " ");
+        }
+        newSql = insertsql.toString();
+        // System.out.println("nuevo insert ->"+newSql);
+    }
 
     @Override
     public void run() {
+        
 
-      //  System.out.println("registros por hilo" + this.registroXhilo);
+        long TInicio, TFin, tiempo;           //Para determinar el tiempo
+        TInicio = System.currentTimeMillis();
 
-       
-
-        PreparedStatement pst = null;
-        String sql = statement.Statement(schema, tabla, pk, UNIQUE);
-        String Updatesql = statement.UpdateStatement(schema, tabla, pk, num_updates);
-        //System.out.println(Updatesql);
-        String Deletesql = statement.DeleteStatement(schema, tabla, pk, num_deletes);
-       // System.out.println(Deletesql);
-
-    //    System.out.println(this.n_registros);
+        //  System.out.println("registros por hilo" + this.registroXhilo);
+        // System.out.println(Deletesql);
+        //    System.out.println(this.n_registros);
+        int n = 1000;
+        int pinta = 1000;
 
         try {
-            System.out.println("Ejecutando los Insert");
+            System.out.println(sql);
             pst = (OraclePreparedStatement) con.prepareStatement(sql);
             for (int i = 0; i < this.registroXhilo; i++) {
-
-              //  if (i == 50000 || i == 100000 || i == 150000 || i == 200000 || i == 250000 || i == 300000 || i == 350000 || i == 400000) {
+                //  if (i == 50000 || i == 100000 || i == 150000 || i == 200000 || i == 250000 || i == 300000 || i == 350000 || i == 400000) {
+                if (i % pinta == 0) {
                     System.out.println(i);
-             //   }
 
+                }
+
+                //   }
                 pst.execute();
 
+                if (i % n == 0) {
+                    con.commit();
+                }
             }
-            System.out.println("Ejecutando los Updates");
+
             pst = (OraclePreparedStatement) con.prepareStatement(Updatesql);
             pst.execute();
-            System.out.println("Ejecutando los Deletes");
             pst = (OraclePreparedStatement) con.prepareStatement(Deletesql);
             pst.execute();
             con.commit();
             pst.close();
 
         } catch (SQLException e) {
+            try {
+                con.commit();
+                pst.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Hilos.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println(e);
         }
 
+        
+
+        TFin = System.currentTimeMillis();
+        tiempo = TFin - TInicio;
+        System.out.println("Tiempo de ejecución  por hilo en segundos ->: " + (tiempo/1000));
     }
 
 }

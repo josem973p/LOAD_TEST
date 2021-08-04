@@ -64,7 +64,7 @@ public class RamdomValues {
         date.append("/");
 
         c = (int) (random.nextInt(12));
-        character = mes[c];
+        character ="01";
         date.append(character);
         date.append("/");
 

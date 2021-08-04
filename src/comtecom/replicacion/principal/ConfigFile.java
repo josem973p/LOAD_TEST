@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 /**
  *
@@ -41,6 +42,14 @@ public class ConfigFile {
 
         Conexion c = new Conexion(login, clave, url);
         Hilos obj = new Hilos(n, schema, tabla, pk, UNIQUE, n_updates, n_deletes);
+        obj.generasql();
+        
+        Calendar calendario = Calendar.getInstance();
+        int hora, minutos, segundos;
+        hora = calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND);
+        System.out.println("Hora de Inicio " + hora +":"+ minutos +":"+segundos);
         
       
         Hilos h1 = new Hilos();
@@ -64,10 +73,13 @@ public class ConfigFile {
     //    Hilos h19 = new Hilos();
      //   Hilos h20 = new Hilos();
 
+    //  h1.setPriority(Thread.MAX_PRIORITY);
+     // h2.setPriority(Thread.MAX_PRIORITY);
+     // h3.setPriority(Thread.MAX_PRIORITY);
         h1.start();
         h2.start();
         h3.start();
-        h4.start();
+       h4.start();
      //   h5.start();
       //  h6.start();
     //    h7.start();
@@ -88,6 +100,25 @@ public class ConfigFile {
         System.out.println(n_updates+": Updates generados en la tabla: "+tabla);
         System.out.println(n_deletes+": Deletes generados en la tabla: "+tabla);
         
+        
+        
+        System.out.println(h1.isAlive());
+        
+        
+        while (true) {            
+            if (h1.isAlive()==false && h2.isAlive()==false  && h3.isAlive()==false  && h4.isAlive()==false  ) {
+                
+        Calendar calendario2 = Calendar.getInstance();
+        int hora2, minutos2, segundos2;
+        hora2 = calendario2.get(Calendar.HOUR_OF_DAY);
+        minutos2 = calendario2.get(Calendar.MINUTE);
+        segundos2 = calendario2.get(Calendar.SECOND);
+        System.out.println("Hora de fin " + hora2 +":"+ minutos2 +":"+segundos2);
+        break;
+                
+            }
+        }
+      
        
         
     }
